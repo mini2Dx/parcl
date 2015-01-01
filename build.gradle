@@ -1,0 +1,33 @@
+repositories {
+    mavenCentral()
+	maven { url "http://maven.mini2dx.org/content/repositories/thirdparty" }
+}
+
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+group = 'com.battlebardgames.parcl'
+version = '1.0.0-SNAPSHOT'
+
+configurations {
+    includeInJar
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+	compile "net.java:appbundler:1.0"
+	
+	testCompile 'junit:junit:4.11'
+}
+
+install {
+    repositories.mavenInstaller {
+        pom.version = project.version
+        pom.artifactId = project.name
+    }
+}
+
+jar {
+
+}
