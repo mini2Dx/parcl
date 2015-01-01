@@ -23,9 +23,29 @@
  */
 package com.battlebardgames.parcl.domain
 
+import org.apache.tools.ant.types.FileSet
+
 /**
  * Configuration for Mac OS X apps
  */
 class App {
-	String jrePath
+    List<String> vmArgs;
+    List<String> appArgs;
+    String appName
+    String icon
+    String applicationCategory
+    String displayName
+    String identifier
+    String copyright
+    FileSet runtimeFileSet;
+    
+    void withJre() {
+        withJre(System.env.'JAVA_HOME')
+    }
+    
+    void withJre(String jdkPath) {
+        FileSet fileset = new FileSet()
+        fileset.setDir(new File(jdkPath))
+        this.runtimeFileSet = fileset
+    }
 }

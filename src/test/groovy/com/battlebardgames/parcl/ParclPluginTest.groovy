@@ -25,38 +25,69 @@ package com.battlebardgames.parcl
 
 import static org.junit.Assert.*
 
+import org.apache.tools.ant.types.FileSet
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test
 
 class ParclPluginTest {
-	@Test
-	public void testPluginLoadsExtension() {
-		Project project = ProjectBuilder.builder().build()
-		project.apply plugin: 'com.battlebardgames.parcl'
+    @Test
+    public void testPluginLoadsExtension() {
+        Project project = ProjectBuilder.builder().build()
+        project.apply plugin: 'com.battlebardgames.parcl'
 
-		String testName = "example"
-		String testJarPath = "path/example.jar"
-		String testMainClassName = "com.example.Example"
+        String testName = "example"
+        String testJarPath = "path/example.jar"
+        String testMainClassName = "com.example.Example"
 
-		String testJrePath = "/test/app/path/jdk"
-		
-		project.configure(project) {
-			mainClassName = testMainClassName
-			
-			parcl {
-				name = testName
-				jar = testJarPath
-				
-				exe {
-					jrePath = testJrePath
-				}
-			}
-		}
+        String testJdkPath = "/test/app/path/jdk"
+        String testIconPath = "icon.icns"
+        String testApplicationCategory = "public.app-category.adventure-games"
+        String testIdentifier = "com.example.ExampleGame"
+        String testCopyright = "Copyright 2015 Test Company"
+        
+        def testVmArgs = ["-Xmx1g"]
+        def testAppArgs = ["test1", "test2"]
 
-		assertTrue(project.getExtensions().findByName('parcl').name.equals(testName))
-		assertTrue(project.getExtensions().findByName('parcl').jar.equals(testJarPath))
-		
-		assertTrue(project.getExtensions().findByName('parcl').exe.jrePath.equals(testJrePath))
-	}
+        project.configure(project) {
+            mainClassName = testMainClassName
+
+            parcl {
+                mainJar = testJarPath
+
+                exe {
+                    exeName = testName
+                    jdkPath = testJdkPath
+                }
+
+                app {
+                    vmArgs = testVmArgs
+                    appArgs = testAppArgs
+                    appName = testName
+                    icon = testIconPath
+                    applicationCategory = testApplicationCategory
+                    displayName = testName
+                    identifier = testIdentifier
+                    copyright = testCopyright
+
+                    withJre()
+                }
+            }
+        }
+
+        assertTrue(project.getExtensions().findByName('parcl').mainJar.equals(testJarPath))
+
+        assertTrue(project.getExtensions().findByName('parcl').exe.exeName.equals(testName))
+        assertTrue(project.getExtensions().findByName('parcl').exe.jdkPath.equals(testJdkPath))
+
+        assertTrue(project.getExtensions().findByName('parcl').app.appName.equals(testName))
+        assertTrue(project.getExtensions().findByName('parcl').app.icon.equals(testIconPath))
+        assertTrue(project.getExtensions().findByName('parcl').app.applicationCategory.equals(testApplicationCategory))
+        assertTrue(project.getExtensions().findByName('parcl').app.displayName.equals(testName))
+        assertTrue(project.getExtensions().findByName('parcl').app.identifier.equals(testIdentifier))
+        assertTrue(project.getExtensions().findByName('parcl').app.copyright.equals(testCopyright))
+        assertTrue(project.getExtensions().findByName('parcl').app.runtimeFileSet instanceof FileSet)
+        assertTrue(project.getExtensions().findByName('parcl').app.vmArgs instanceof List)
+        assertTrue(project.getExtensions().findByName('parcl').app.appArgs instanceof List)
+    }
 }

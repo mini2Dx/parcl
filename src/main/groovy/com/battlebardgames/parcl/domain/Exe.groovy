@@ -27,5 +27,6 @@ package com.battlebardgames.parcl.domain
  * Configuration for Windows packages
  */
 class Exe {
-	String jrePath
+    String exeName
+	String jdkPath
 }

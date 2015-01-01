@@ -27,5 +27,5 @@ package com.battlebardgames.parcl.domain
  * Configuration for Debian packages
  */
 class Deb {
-	String jrePath
+	String jdkPath
 }

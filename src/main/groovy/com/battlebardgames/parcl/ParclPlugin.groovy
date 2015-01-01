@@ -50,11 +50,11 @@ class ParclPlugin implements Plugin<Project> {
 		project.parcl.extensions.create("deb", Deb)
 
 		if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-			project.task('buildNative', type: ExeBundleTask)
+			project.task('bundleNative', type: ExeBundleTask)
 		} else if (Os.isFamily(Os.FAMILY_MAC)) {
-			project.task('buildNative', type: AppBundleTask)
+			project.task('bundleNative', type: AppBundleTask)
 		} else if (Os.isFamily(Os.FAMILY_UNIX)) {
-			project.task('buildNative', type: DebBundleTask)
+			project.task('bundleNative', type: DebBundleTask)
 		}
 	}
 }

@@ -27,6 +27,5 @@ package com.battlebardgames.parcl
  * Root configuration extension object
  */
 class ParclExtension {
-	String name
-	String jar
+	String mainJar
 }
