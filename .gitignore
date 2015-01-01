@@ -9,3 +9,10 @@ gradle-app.setting
 .settings
 .prefs
 *.project
+
+natives/windows/bin
+natives/windows/obj
+*.exe
+*.pdb
+*.suo
+*.user
