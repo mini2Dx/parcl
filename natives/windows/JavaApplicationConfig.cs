@@ -72,17 +72,17 @@ namespace parcl
                 arguments.Append(jar);
 
                 if(i < ClassPath.Count - 1) {
-                    arguments.Append(":");
+                    arguments.Append(";");
                 }
             }
 
-            arguments.Append(MainClassName);
+            arguments.Append(" " + MainClassName);
 
             if (AppArgs != null)
             {
                 foreach (String arg in AppArgs)
                 {
-                    arguments.Append(arg + " ");
+                    arguments.Append(" " + arg);
                 }
             }
 

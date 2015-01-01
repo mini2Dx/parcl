@@ -90,6 +90,43 @@ class ExeBundleTask extends DefaultTask {
 		writer.println("<?xml version=\"1.0\"?>")
 		writer.println("<application xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">")
 
+		writer.println("<mainClassName>" + project.convention.plugins.application.mainClassName + "</mainClassName>")
+		writer.println("<includesJre>" + includeJre + "</includesJre>")
+		
+		writer.println("<classpath>")
+		
+		File jarDirectory = new File(outputDirectory, "libs")
+		File [] jars = jarDirectory.listFiles()
+		for(int i = 0; i < jars.length; i++) {
+			File jar = jars[i]
+			if(jar.isFile() && jar.getAbsolutePath().endsWith(".jar")) {
+				writer.println("<jar>" + jar.getName() + "</jar>")
+			}
+		}
+		
+		writer.println("</classpath>")
+		
+		List<String> vmArgs = project.getExtensions().findByName('parcl').app.vmArgs
+		if(vmArgs != null) {
+			writer.println("<vmArgs>")
+			for(String arg : vmArgs) {
+				writer.println("<arg>" + arg + "</arg>")
+			}
+			writer.println("</vmArgs>")
+		} else {
+			writer.println("<vmArgs />")
+		}
+
+		List<String> appArgs = project.getExtensions().findByName('parcl').app.appArgs
+		if(appArgs != null) {
+			writer.println("<appArgs>")
+			for(String arg in appArgs) {
+				writer.println("<arg>" + arg + "</arg>")
+			}
+			writer.println("</appArgs>")
+		} else {
+			writer.println("<appArgs />")
+		}
 		writer.println("</application>")
 		writer.flush()
 		writer.close()

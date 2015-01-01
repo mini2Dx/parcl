@@ -60,7 +60,7 @@ namespace parcl
             Process process = new Process();
             if (applicationConfig.IncludesJre)
             {
-                process.StartInfo.FileName = "./jre/java";
+                process.StartInfo.FileName = Path.Combine("jre", "bin", "java");
             }
             else
             {
@@ -68,6 +68,8 @@ namespace parcl
             }
             process.StartInfo.Arguments = applicationConfig.ToStartInfoArguments();
             process.StartInfo.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.CreateNoWindow = true;
 
             Console.WriteLine("Executing " + Path.Combine(process.StartInfo.WorkingDirectory, process.StartInfo.FileName) + " " + process.StartInfo.Arguments);
             process.Start();

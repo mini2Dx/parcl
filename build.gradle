@@ -32,7 +32,7 @@ if (Os.isFamily(Os.FAMILY_WINDOWS)) {
 	task buildExe(type:Exec) {
 		workingDir 'natives/windows'
 	
-		commandLine 'cmd', '/c', 'MSBuild', 'parcl.sln', '/p:Configuration=Release'
+		commandLine 'cmd', '/c', 'MSBuild', 'parcl.sln', '/p:Configuration=Release', '/t:rebuild'
 	}
 	
 	task copyExeToJar(type: Copy, dependsOn: buildExe) {
@@ -42,7 +42,7 @@ if (Os.isFamily(Os.FAMILY_WINDOWS)) {
 		into 'src/main/resources'
 	}
 	
-	build.dependsOn copyExeToJar
+	assemble.dependsOn copyExeToJar
 }
 
 
