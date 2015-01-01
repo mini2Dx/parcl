@@ -45,9 +45,18 @@ if (Os.isFamily(Os.FAMILY_WINDOWS)) {
 	assemble.dependsOn copyExeToJar
 }
 
-
-
-
 jar {
 
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "http://maven.mini2dx.org/content/repositories/releases") {
+                if(project.hasProperty('mini2DxMavenUser')) {
+                    authentication(userName: project.property('mini2DxMavenUser'), password: project.property('mini2DxMavenPassword'))
+                }
+            }
+        }
+    }
 }
