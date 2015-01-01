@@ -23,7 +23,6 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using System.IO;
@@ -68,7 +67,7 @@ namespace parcl
             arguments.Append("-classpath ");
             for (int i = 0; i < ClassPath.Count; i++)
             {
-                String jar = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "libs", ClassPath[i]);
+                String jar = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.Combine("libs", ClassPath[i]));
                 arguments.Append(jar);
 
                 if(i < ClassPath.Count - 1) {

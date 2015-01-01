@@ -23,7 +23,6 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using System.IO;
@@ -60,7 +59,7 @@ namespace parcl
             Process process = new Process();
             if (applicationConfig.IncludesJre)
             {
-                process.StartInfo.FileName = Path.Combine("jre", "bin", "java");
+                process.StartInfo.FileName = Path.Combine("jre", Path.Combine("bin", "java"));
             }
             else
             {
