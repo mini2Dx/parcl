@@ -23,10 +23,22 @@
  */
 package com.battlebardgames.parcl.domain
 
+import java.util.List;
+
 /**
  * Configuration for Windows packages
  */
 class Exe {
+	List<String> vmArgs
+	List<String> appArgs
     String exeName
-	String jdkPath
+	String javaHome
+	
+	void withJre() {
+		withJre(System.env.'JAVA_HOME')
+	}
+	
+	void withJre(String javaHome) {
+		this.javaHome = javaHome
+	}
 }

@@ -1,5 +1,7 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
 repositories {
-    mavenCentral()
+	mavenCentral()
 	maven { url "http://maven.mini2dx.org/content/repositories/thirdparty" }
 }
 
@@ -9,24 +11,42 @@ apply plugin: 'maven'
 group = 'com.battlebardgames.parcl'
 version = '1.0.0-SNAPSHOT'
 
-configurations {
-    includeInJar
-}
+configurations { includeInJar }
 
 dependencies {
-    compile gradleApi()
-    compile localGroovy()
+	compile gradleApi()
+	compile localGroovy()
 	compile "net.java:appbundler:1.0"
-	
+
 	testCompile 'junit:junit:4.11'
 }
 
 install {
-    repositories.mavenInstaller {
-        pom.version = project.version
-        pom.artifactId = project.name
-    }
+	repositories.mavenInstaller {
+		pom.version = project.version
+		pom.artifactId = project.name
+	}
 }
+
+if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+	task buildExe(type:Exec) {
+		workingDir 'natives/windows'
+	
+		commandLine 'cmd', '/c', 'MSBuild', 'parcl.sln', '/p:Configuration=Release'
+	}
+	
+	task copyExeToJar(type: Copy, dependsOn: buildExe) {
+		from 'natives/windows/bin/Release'
+		include '*.exe'
+		include '*.pdb'
+		into 'src/main/resources'
+	}
+	
+	build.dependsOn copyExeToJar
+}
+
+
+
 
 jar {
 

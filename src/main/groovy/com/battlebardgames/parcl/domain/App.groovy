@@ -29,8 +29,8 @@ import org.apache.tools.ant.types.FileSet
  * Configuration for Mac OS X apps
  */
 class App {
-    List<String> vmArgs;
-    List<String> appArgs;
+    List<String> vmArgs
+    List<String> appArgs
     String appName
     String icon
     String applicationCategory
@@ -43,9 +43,9 @@ class App {
         withJre(System.env.'JAVA_HOME')
     }
     
-    void withJre(String jdkPath) {
+    void withJre(String javaHome) {
         FileSet fileset = new FileSet()
-        fileset.setDir(new File(jdkPath))
+        fileset.setDir(new File(javaHome))
         this.runtimeFileSet = fileset
     }
 }

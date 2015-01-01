@@ -56,8 +56,11 @@ class ParclPluginTest {
                 mainJar = testJarPath
 
                 exe {
+					vmArgs = testVmArgs
+					appArgs = testAppArgs
                     exeName = testName
-                    jdkPath = testJdkPath
+
+					withJre()
                 }
 
                 app {
@@ -78,7 +81,9 @@ class ParclPluginTest {
         assertTrue(project.getExtensions().findByName('parcl').mainJar.equals(testJarPath))
 
         assertTrue(project.getExtensions().findByName('parcl').exe.exeName.equals(testName))
-        assertTrue(project.getExtensions().findByName('parcl').exe.jdkPath.equals(testJdkPath))
+        assertTrue(project.getExtensions().findByName('parcl').exe.javaHome instanceof String)
+		assertTrue(project.getExtensions().findByName('parcl').exe.vmArgs instanceof List)
+		assertTrue(project.getExtensions().findByName('parcl').exe.appArgs instanceof List)
 
         assertTrue(project.getExtensions().findByName('parcl').app.appName.equals(testName))
         assertTrue(project.getExtensions().findByName('parcl').app.icon.equals(testIconPath))
