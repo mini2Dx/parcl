@@ -38,19 +38,9 @@ class App {
     String displayName
     String identifier
     String copyright
-    FileSet runtimeFileSet;
-    
-    void withJre() {
-		String javaHome = System.env.'JAVA_HOME'
-		if(javaHome == null) {
-			throw new NoJavaHomeException()
-		}
-        withJre(javaHome)
-    }
+    String javaHome;
     
     void withJre(String javaHome) {
-        FileSet fileset = new FileSet()
-        fileset.setDir(new File(javaHome))
-        this.runtimeFileSet = fileset
+        this.javaHome = javaHome
     }
 }

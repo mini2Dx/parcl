@@ -30,6 +30,8 @@ import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.WorkResult
 
+import static com.battlebardgames.parcl.ParclUtils.*
+
 /**
  * Task for bundling an application into a .exe for Windows
  */
@@ -143,42 +145,5 @@ class ExeBundleTask extends DefaultTask {
 		File installDir = new File(project.getBuildDir(), "install")
 		File projectInstallDir = new File(installDir, project.name)
 		return new File(projectInstallDir, "lib")
-	}
-
-	File getJreFolder(String directory) {
-		File directoryHandle = new File(directory)
-		if(directory.contains("jre")) {
-			return directoryHandle
-		}
-
-		File [] children = directoryHandle.listFiles()
-		for (int i = 0; i < children.length; i++) {
-			File child = children[i]
-			if(child.isDirectory()) {
-				if(child.getAbsolutePath().contains("jre")) {
-					return child
-				}
-			}
-		}
-		return null
-	}
-
-	def copyInternalFileToExternal(String internalFilepath, String outputFilepath) {
-		InputStream internalStream = ExeBundleTask.class.getClassLoader()
-				.getResourceAsStream(internalFilepath)
-		FileOutputStream outputStream
-		try {
-			outputStream = new FileOutputStream(outputFilepath)
-			byte[] buffer = new byte[2048]
-			int readResult = internalStream.read(buffer);
-			while(readResult != -1) {
-				outputStream.write(buffer, 0, readResult);
-				readResult = internalStream.read(buffer);
-			}
-		} finally {
-			if(outputStream != null) {
-				outputStream.close();
-			}
-		}
 	}
 }

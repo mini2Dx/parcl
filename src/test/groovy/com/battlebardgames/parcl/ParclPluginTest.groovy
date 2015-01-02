@@ -40,7 +40,7 @@ class ParclPluginTest {
         String testJarPath = "path/example.jar"
         String testMainClassName = "com.example.Example"
 
-        String testJdkPath = "/test/app/path/jdk"
+        String testJavaHome = "/test/app/path/java"
         String testIconPath = "icon.icns"
         String testApplicationCategory = "public.app-category.adventure-games"
         String testIdentifier = "com.example.ExampleGame"
@@ -60,7 +60,7 @@ class ParclPluginTest {
 					appArgs = testAppArgs
                     exeName = testName
 
-					withJre()
+					withJre(testJavaHome)
                 }
 
                 app {
@@ -73,15 +73,27 @@ class ParclPluginTest {
                     identifier = testIdentifier
                     copyright = testCopyright
 
-                    withJre()
+                    withJre(testJavaHome)
                 }
+				
+				linux {
+					vmArgs = testVmArgs
+					appArgs = testAppArgs
+					binName = testName
+
+					withJre(testJavaHome)
+					
+					deb {
+						
+					}
+				}
             }
         }
 
         assertTrue(project.getExtensions().findByName('parcl').mainJar.equals(testJarPath))
 
         assertTrue(project.getExtensions().findByName('parcl').exe.exeName.equals(testName))
-        assertTrue(project.getExtensions().findByName('parcl').exe.javaHome instanceof String)
+        assertTrue(project.getExtensions().findByName('parcl').exe.javaHome.equals(testJavaHome))
 		assertTrue(project.getExtensions().findByName('parcl').exe.vmArgs instanceof List)
 		assertTrue(project.getExtensions().findByName('parcl').exe.appArgs instanceof List)
 
@@ -91,8 +103,13 @@ class ParclPluginTest {
         assertTrue(project.getExtensions().findByName('parcl').app.displayName.equals(testName))
         assertTrue(project.getExtensions().findByName('parcl').app.identifier.equals(testIdentifier))
         assertTrue(project.getExtensions().findByName('parcl').app.copyright.equals(testCopyright))
-        assertTrue(project.getExtensions().findByName('parcl').app.runtimeFileSet instanceof FileSet)
+        assertTrue(project.getExtensions().findByName('parcl').app.javaHome.equals(testJavaHome))
         assertTrue(project.getExtensions().findByName('parcl').app.vmArgs instanceof List)
         assertTrue(project.getExtensions().findByName('parcl').app.appArgs instanceof List)
+		
+		assertTrue(project.getExtensions().findByName('parcl').linux.binName.equals(testName))
+		assertTrue(project.getExtensions().findByName('parcl').linux.javaHome.equals(testJavaHome))
+		assertTrue(project.getExtensions().findByName('parcl').linux.vmArgs instanceof List)
+		assertTrue(project.getExtensions().findByName('parcl').linux.appArgs instanceof List)
     }
 }

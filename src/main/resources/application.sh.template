@@ -1,0 +1,17 @@
+#!/bin/bash
+APPLICATION_HOME=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
+cd "$APPLICATION_HOME"
+
+INCLUDES_JRE={{includesJre}}
+VM_ARGS="{{vmArgs}}"
+APP_ARGS="{{appArgs}}"
+MAIN_CLASS_NAME={{mainClassName}}
+CLASSPATH="{{classpath}}"
+
+if $INCLUDES_JRE ; then
+	JAVA_COMMAND="./jre/bin/java"
+else
+	JAVA_COMMAND="java"
+fi
+
+exec "$JAVA_COMMAND" "$VM_ARGS" -classpath "$CLASSPATH" "$MAIN_CLASS_NAME" "$APP_ARGS"

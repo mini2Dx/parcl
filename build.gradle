@@ -17,6 +17,7 @@ dependencies {
 	compile gradleApi()
 	compile localGroovy()
 	compile "net.java:appbundler:1.0"
+	compile "com.github.spullara.mustache.java:compiler:0.8.17"
 
 	testCompile 'junit:junit:4.11'
 }

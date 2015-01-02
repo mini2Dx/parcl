@@ -29,10 +29,11 @@ import org.gradle.api.Project
 import org.gradle.api.plugins.ApplicationPlugin
 
 import com.battlebardgames.parcl.domain.App
+import com.battlebardgames.parcl.domain.Linux
 import com.battlebardgames.parcl.domain.Deb
 import com.battlebardgames.parcl.domain.Exe
 import com.battlebardgames.parcl.task.AppBundleTask
-import com.battlebardgames.parcl.task.DebBundleTask
+import com.battlebardgames.parcl.task.LinuxBundleTask
 import com.battlebardgames.parcl.task.ExeBundleTask
 
 /**
@@ -47,14 +48,15 @@ class ParclPlugin implements Plugin<Project> {
 		project.extensions.create("parcl", ParclExtension)
 		project.parcl.extensions.create("exe", Exe)
 		project.parcl.extensions.create("app", App)
-		project.parcl.extensions.create("deb", Deb)
+		project.parcl.extensions.create("linux", Linux)
+		project.parcl.linux.extensions.create("deb", Deb)
 
 		if (Os.isFamily(Os.FAMILY_WINDOWS)) {
 			project.task('bundleNative', type: ExeBundleTask)
 		} else if (Os.isFamily(Os.FAMILY_MAC)) {
 			project.task('bundleNative', type: AppBundleTask)
 		} else if (Os.isFamily(Os.FAMILY_UNIX)) {
-			project.task('bundleNative', type: DebBundleTask)
+			project.task('bundleNative', type: LinuxBundleTask)
 		}
 	}
 }

@@ -31,6 +31,10 @@ import org.gradle.api.tasks.TaskAction;
  * Task for bundling applications into a Debian-based installer
  */
 class DebBundleTask extends DefaultTask {
+	DebBundleTask() {
+		super()
+		dependsOn('bundleLinuxBin')
+	}
 
 	@TaskAction
 	def bundleDeb() {
