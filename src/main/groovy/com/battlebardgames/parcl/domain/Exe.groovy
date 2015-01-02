@@ -23,6 +23,7 @@
  */
 package com.battlebardgames.parcl.domain
 
+import com.battlebardgames.parcl.exception.NoJavaHomeException
 import java.util.List;
 
 /**
@@ -35,7 +36,11 @@ class Exe {
 	String javaHome
 	
 	void withJre() {
-		withJre(System.env.'JAVA_HOME')
+		String javaHome = System.env.'JAVA_HOME'
+		if(javaHome == null) {
+			throw new NoJavaHomeException()
+		}
+		withJre(javaHome)
 	}
 	
 	void withJre(String javaHome) {

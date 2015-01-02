@@ -21,36 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.battlebardgames.parcl.domain
-
-import com.battlebardgames.parcl.exception.NoJavaHomeException
-import org.apache.tools.ant.types.FileSet
+package com.battlebardgames.parcl.exception;
 
 /**
- * Configuration for Mac OS X apps
+ * An exception thrown when JAVA_HOME is requested but not set
  */
-class App {
-    List<String> vmArgs
-    List<String> appArgs
-    String appName
-    String icon
-    String applicationCategory
-    String displayName
-    String identifier
-    String copyright
-    FileSet runtimeFileSet;
-    
-    void withJre() {
-		String javaHome = System.env.'JAVA_HOME'
-		if(javaHome == null) {
-			throw new NoJavaHomeException()
-		}
-        withJre(javaHome)
-    }
-    
-    void withJre(String javaHome) {
-        FileSet fileset = new FileSet()
-        fileset.setDir(new File(javaHome))
-        this.runtimeFileSet = fileset
-    }
+public class NoJavaHomeException extends Exception {
+	private static final long serialVersionUID = 2546132233753016809L;
+	private static final String MESSAGE = "JAVA_HOME was requested but is not set as an environment variable";
+	
+	public NoJavaHomeException() {
+		super(MESSAGE);
+	}
 }
