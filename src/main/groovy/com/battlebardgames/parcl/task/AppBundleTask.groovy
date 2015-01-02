@@ -71,7 +71,7 @@ class AppBundleTask extends DefaultTask {
 		String javaHome = project.getExtensions().findByName('parcl').app.javaHome
         if(javaHome != null) {
 			FileSet runtimeFileSet = new FileSet()
-			runtimeFileSet.setDir(javaHome)
+			runtimeFileSet.setDir(new File(javaHome))
             appBundlerTask.addConfiguredRuntime(runtimeFileSet)
         }
         
