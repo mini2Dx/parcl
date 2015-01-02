@@ -28,6 +28,10 @@ install {
 	}
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2.1'
+}
+
 if (Os.isFamily(Os.FAMILY_WINDOWS)) {
 	task buildExe(type:Exec) {
 		workingDir 'natives/windows'
