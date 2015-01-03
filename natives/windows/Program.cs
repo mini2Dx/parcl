@@ -66,7 +66,7 @@ namespace parcl
                 process.StartInfo.FileName = "java";
             }
             process.StartInfo.Arguments = applicationConfig.ToStartInfoArguments();
-            process.StartInfo.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            process.StartInfo.WorkingDirectory = @AppDomain.CurrentDomain.BaseDirectory;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.CreateNoWindow = true;
 
