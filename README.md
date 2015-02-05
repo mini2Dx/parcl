@@ -16,7 +16,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'com.battlebardgames.parcl', name: 'parcl', version: '1.0.0'
+        classpath group: 'com.battlebardgames.parcl', name: 'parcl', version: '1.0.2'
     }
 }
 ```
