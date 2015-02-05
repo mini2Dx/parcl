@@ -9,7 +9,7 @@ apply plugin: 'groovy'
 apply plugin: 'maven'
 
 group = 'com.battlebardgames.parcl'
-version = '1.0.2-SNAPSHOT'
+version = '1.0.2'
 
 configurations { includeInJar }
 
