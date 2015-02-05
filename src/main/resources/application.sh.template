@@ -1,5 +1,5 @@
 #!/bin/bash
-APPLICATION_HOME=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
+APPLICATION_HOME="$( cd "$( dirname "$0" )" && pwd )"
 cd "$APPLICATION_HOME"
 
 INCLUDES_JRE={{includesJre}}
