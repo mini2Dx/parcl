@@ -98,7 +98,7 @@ class LinuxBundleTask extends DefaultTask {
 		scopes.put("classpath", getClasspath(outputDirectory))
 
 		try {
-			File binFile = new File(outputDirectory, project.getExtensions().findByName('parcl').linux.binName + ".sh")
+			File binFile = new File(outputDirectory, project.getExtensions().findByName('parcl').linux.binName)
 			Writer writer = new FileWriter(binFile)
 			MustacheFactory mustacheFactory = new DefaultMustacheFactory()
 			Mustache mustache = mustacheFactory.compile(binTemplateReader, "application.sh")

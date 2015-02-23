@@ -9,7 +9,7 @@ MAIN_CLASS_NAME={{mainClassName}}
 CLASSPATH="{{classpath}}"
 
 if $INCLUDES_JRE ; then
-	JAVA_COMMAND="./jre/bin/java"
+	JAVA_COMMAND="$APPLICATION_HOME/jre/bin/java"
 else
 	JAVA_COMMAND="java"
 fi
