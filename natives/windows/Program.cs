@@ -27,6 +27,7 @@ using System.Text;
 using System.Diagnostics;
 using System.IO;
 using System.Xml.Serialization;
+using System.Windows.Forms;
 
 namespace parcl
 {
@@ -63,7 +64,17 @@ namespace parcl
             }
             else
             {
-                process.StartInfo.FileName = "java";
+                string javaHomePath = GetJavaInstallationPath();
+                string javaPath = System.IO.Path.Combine(javaHomePath, "bin\\Java.exe");
+                if (System.IO.File.Exists(javaPath))
+                {
+                    process.StartInfo.FileName = javaPath;
+                }
+                else
+                {
+                    MessageBox.Show("Could not find Java installation. Please ensure JAVA_HOME is configured.");
+                    return;
+                }
             }
             process.StartInfo.Arguments = applicationConfig.ToStartInfoArguments();
             process.StartInfo.WorkingDirectory = @AppDomain.CurrentDomain.BaseDirectory;
@@ -73,6 +84,25 @@ namespace parcl
             Console.WriteLine("Executing " + Path.Combine(process.StartInfo.WorkingDirectory, process.StartInfo.FileName) + " " + process.StartInfo.Arguments);
             process.Start();
             process.WaitForExit();
+        }
+
+        private static string GetJavaInstallationPath()
+        {
+            string environmentPath = Environment.GetEnvironmentVariable("JAVA_HOME");
+            if (!string.IsNullOrEmpty(environmentPath))
+            {
+                return environmentPath;
+            }
+
+            string javaKey = "SOFTWARE\\JavaSoft\\Java Runtime Environment\\";
+            using (Microsoft.Win32.RegistryKey rk = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(javaKey))
+            {
+                string currentVersion = rk.GetValue("CurrentVersion").ToString();
+                using (Microsoft.Win32.RegistryKey key = rk.OpenSubKey(currentVersion))
+                {
+                    return key.GetValue("JavaHome").ToString();
+                }
+            }
         }
     }
 }
