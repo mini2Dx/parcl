@@ -21,28 +21,36 @@ buildscript {
 }
 ```
 
-Then add configuration for your main class and how you want parcl to bundle the application. The following shows the minimum required configuration.
+Then add the plugin to your project, configuration for your main class and how you want parcl to bundle the application. The following shows the minimum required configuration.
 
 ```gradle
-mainClassName = "com.example.MyMainClass"
+project(":projectName") {
+   apply plugin: "java"
+   apply plugin: "application"
+   apply plugin: "com.battlebardgames.parcl"
+   
+   ........
 
-parcl {
-  exe {
-    exeName = "myapplication"
-  }
+   mainClassName = "com.example.MyMainClass"
+
+   parcl {
+      exe {
+         exeName = "myapplication"
+      }
 		
-  app {
-    appName = "My Application"
-    icon = "relative/path/to/icon.icns"
-    applicationCategory = "public.app-category.adventure-games"
-    displayName = 'My Application'
-    identifier = 'com.example.my.apple.identifier'
-    copyright = 'Copyright 2015 Your Name Here'
-  }
+      app {
+         appName = "My Application"
+         icon = "relative/path/to/icon.icns"
+         applicationCategory = "public.app-category.adventure-games"
+         displayName = 'My Application'
+         identifier = 'com.example.my.apple.identifier'
+         copyright = 'Copyright 2015 Your Name Here'
+      }
 		
-  linux {
-    binName = "myapplication"
-  }
+      linux {
+         binName = "myapplication"
+      }
+   }
 }
 ```
 
