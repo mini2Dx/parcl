@@ -21,18 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.battlebardgames.parcl.domain
+package org.mini2Dx.parcl.domain
 
 import com.battlebardgames.parcl.exception.NoJavaHomeException
 import java.util.List;
 
 /**
- * Configuration for Windows packages
+ * Configuration for Linux binaries
  */
-class Exe {
+class Linux {
 	List<String> vmArgs
 	List<String> appArgs
-    String exeName
+	String binName
 	String javaHome
 	
 	void withJre(String javaHome) {

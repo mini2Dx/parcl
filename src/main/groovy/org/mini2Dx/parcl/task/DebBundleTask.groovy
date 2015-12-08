@@ -21,16 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.battlebardgames.parcl.exception;
+package org.mini2Dx.parcl.task
+
+import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.Exec
+import org.gradle.api.tasks.TaskAction;
 
 /**
- * An exception thrown when JAVA_HOME is requested but not set
+ * Task for bundling applications into a Debian-based installer
  */
-public class NoJavaHomeException extends Exception {
-	private static final long serialVersionUID = 2546132233753016809L;
-	private static final String MESSAGE = "JAVA_HOME was requested but is not set as an environment variable";
-	
-	public NoJavaHomeException() {
-		super(MESSAGE);
+class DebBundleTask extends DefaultTask {
+	DebBundleTask() {
+		super()
+		dependsOn('bundleLinuxBin')
+	}
+
+	@TaskAction
+	def bundleDeb() {
+		Exec exec = new Exec()
 	}
 }

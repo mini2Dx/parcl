@@ -2,16 +2,17 @@ import org.apache.tools.ant.taskdefs.condition.Os
 
 repositories {
 	mavenCentral()
-	maven { url "http://maven.mini2dx.org/content/repositories/thirdparty" }
+	maven { url "https://mini2dx.org/maven/content/repositories/thirdparty" }
 }
 
 apply plugin: 'groovy'
 apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-group = 'com.battlebardgames.parcl'
+group = 'org.mini2Dx'
 version = '1.0.7-SNAPSHOT'
 
 configurations { includeInJar }
@@ -25,15 +26,8 @@ dependencies {
 	testCompile 'junit:junit:4.11'
 }
 
-install {
-	repositories.mavenInstaller {
-		pom.version = project.version
-		pom.artifactId = project.name
-	}
-}
-
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.2.1'
+    gradleVersion = '2.9'
 }
 
 if (Os.isFamily(Os.FAMILY_WINDOWS)) {
@@ -57,14 +51,29 @@ jar {
 
 }
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: "http://maven.mini2dx.org/content/repositories/releases") {
-                if(project.hasProperty('mini2DxMavenUser')) {
-                    authentication(userName: project.property('mini2DxMavenUser'), password: project.property('mini2DxMavenPassword'))
-                }
-            }
-        }
-    }
+task sourceJar(type: Jar) {
+	from sourceSets.main.allJava
+}
+
+publishing {
+	repositories {
+		maven {
+			url "https://mini2dx.org/maven/content/repositories/releases"
+			if(project.hasProperty('mini2DxMavenUser')) {
+				credentials {
+					username = project.property('mini2DxMavenUser')
+					password = project.property('mini2DxMavenPassword')
+				}
+			}
+		}
+	}
+	publications {
+		maven(MavenPublication) {
+			from components.java
+			
+			artifact sourceJar {
+				classifier "sources"
+			}
+		}
+	}
 }

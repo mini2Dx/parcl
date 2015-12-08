@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.battlebardgames.parcl.task
+package org.mini2Dx.parcl.task
 
 import java.io.File;
 

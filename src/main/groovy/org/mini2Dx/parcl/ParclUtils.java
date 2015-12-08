@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.battlebardgames.parcl;
+package org.mini2Dx.parcl;
 
 import java.io.File;
 import java.io.FileNotFoundException;

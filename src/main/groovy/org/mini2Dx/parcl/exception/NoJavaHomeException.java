@@ -21,21 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.battlebardgames.parcl.domain
-
-import com.battlebardgames.parcl.exception.NoJavaHomeException
-import java.util.List;
+package org.mini2Dx.parcl.exception;
 
 /**
- * Configuration for Linux binaries
+ * An exception thrown when JAVA_HOME is requested but not set
  */
-class Linux {
-	List<String> vmArgs
-	List<String> appArgs
-	String binName
-	String javaHome
+public class NoJavaHomeException extends Exception {
+	private static final long serialVersionUID = 2546132233753016809L;
+	private static final String MESSAGE = "JAVA_HOME was requested but is not set as an environment variable";
 	
-	void withJre(String javaHome) {
-		this.javaHome = javaHome
+	public NoJavaHomeException() {
+		super(MESSAGE);
 	}
 }
