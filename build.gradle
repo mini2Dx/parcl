@@ -13,7 +13,7 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 group = 'org.mini2Dx'
-version = '1.0.7-SNAPSHOT'
+version = '1.0.7'
 
 configurations { includeInJar }
 
