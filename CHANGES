@@ -1,0 +1,23 @@
+[1.0.7]
+- Plugin now lives under min2Dx family as org.mini2Dx.parcl
+
+[1.0.6]
+- Fixed existing Java installation detection on Windows
+
+[1.0.5]
+- Fixed Linux launcher containing Windows line breaks
+
+[1.0.4]
+- Fixed Linux launchers not working on some storefronts
+
+[1.0.3]
+- Forcing Java 7 compatibility
+
+[1.0.2]
+- Improved APPLICATION_HOME resolution on Linux
+
+[1.0.1]
+- Fixed Windows exe not launching correctly when paths have spaces in them
+
+[1.0.0]
+- Initial release
