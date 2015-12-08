@@ -23,7 +23,7 @@
  */
 package org.mini2Dx.parcl.task
 
-import com.battlebardgames.parcl.ParclUtils;
+import org.mini2Dx.parcl.ParclUtils;
 import com.github.mustachejava.DefaultMustacheFactory
 import com.github.mustachejava.Mustache
 import com.github.mustachejava.MustacheFactory
@@ -36,7 +36,7 @@ import java.io.FileWriter;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.TaskAction;
 
-import static com.battlebardgames.parcl.ParclUtils.*
+import static org.mini2Dx.parcl.ParclUtils.*
 
 /**
  * Task for bundling an application into a Linux binary

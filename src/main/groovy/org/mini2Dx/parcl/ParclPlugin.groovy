@@ -28,13 +28,13 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.ApplicationPlugin
 
-import com.battlebardgames.parcl.domain.App
-import com.battlebardgames.parcl.domain.Linux
-import com.battlebardgames.parcl.domain.Deb
-import com.battlebardgames.parcl.domain.Exe
-import com.battlebardgames.parcl.task.AppBundleTask
-import com.battlebardgames.parcl.task.LinuxBundleTask
-import com.battlebardgames.parcl.task.ExeBundleTask
+import org.mini2Dx.parcl.domain.App
+import org.mini2Dx.parcl.domain.Linux
+import org.mini2Dx.parcl.domain.Deb
+import org.mini2Dx.parcl.domain.Exe
+import org.mini2Dx.parcl.task.AppBundleTask
+import org.mini2Dx.parcl.task.LinuxBundleTask
+import org.mini2Dx.parcl.task.ExeBundleTask
 
 /**
  * Implements the plugin. Applies configuration extensions and tasks to a project.

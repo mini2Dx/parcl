@@ -34,7 +34,7 @@ class ParclPluginTest {
     @Test
     public void testPluginLoadsExtension() {
         Project project = ProjectBuilder.builder().build()
-        project.apply plugin: 'com.battlebardgames.parcl'
+        project.apply plugin: 'org.mini2Dx.parcl'
 
         String testName = "example"
         String testJarPath = "path/example.jar"

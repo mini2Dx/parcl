@@ -23,7 +23,7 @@
  */
 package org.mini2Dx.parcl.domain
 
-import com.battlebardgames.parcl.exception.NoJavaHomeException
+import org.mini2Dx.parcl.exception.NoJavaHomeException
 import org.apache.tools.ant.types.FileSet
 
 /**

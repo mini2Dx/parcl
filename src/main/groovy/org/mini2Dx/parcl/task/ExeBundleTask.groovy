@@ -30,7 +30,7 @@ import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.WorkResult
 
-import static com.battlebardgames.parcl.ParclUtils.*
+import static org.mini2Dx.parcl.ParclUtils.*
 
 /**
  * Task for bundling an application into a .exe for Windows
