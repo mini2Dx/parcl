@@ -1,6 +1,8 @@
 parcl
 ==========
 
+[![Build Status](https://travis-ci.org/mini2Dx/parcl.svg?branch=master)](https://travis-ci.org/mini2Dx/parcl)
+
 Gradle plugin for bundling your Java application as Windows, Mac and Linux native applications
 
 ## How to use
@@ -11,12 +13,12 @@ Add the following buildscript configuration to the top of your build.gradle
 buildscript {
     repositories {
         mavenLocal()
-        maven { url "http://maven.mini2dx.org/content/repositories/thirdparty" }
-		maven { url "http://maven.mini2dx.org/content/repositories/releases" }
+        maven { url "https://mini2dx.org/maven/content/repositories/thirdparty" }
+		maven { url "https://mini2dx.org/maven/content/repositories/releases" }
         mavenCentral()
     }
     dependencies {
-        classpath group: 'com.battlebardgames.parcl', name: 'parcl', version: '1.0.2'
+        classpath group: 'org.mini2Dx', name: 'parcl', version: '1.0.7'
     }
 }
 ```
@@ -27,7 +29,7 @@ Then add the plugin to your project, configuration for your main class and how y
 project(":projectName") {
    apply plugin: "java"
    apply plugin: "application"
-   apply plugin: "com.battlebardgames.parcl"
+   apply plugin: "org.mini2Dx.parcl"
    
    ........
 
@@ -111,7 +113,7 @@ parcl {
 
 ## Contributing
 
-Pull requests are welcome :) Any issues found please add them to the [Issue Tracker](https://github.com/tomcashman/parcl/issues).
+Pull requests are welcome :) Any issues found please add them to the [Issue Tracker](https://github.com/mini2Dx/parcl/issues).
 
 Gradle wrapper is included in the code. The following tools were used for development:
 * Gradle 2.2.1
