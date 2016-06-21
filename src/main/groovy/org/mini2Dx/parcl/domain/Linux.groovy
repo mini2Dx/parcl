@@ -34,6 +34,7 @@ class Linux {
 	List<String> appArgs
 	String binName
 	String javaHome
+	boolean preferSystemJre
 	
 	void withJre(String javaHome) {
 		this.javaHome = javaHome

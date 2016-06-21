@@ -2,16 +2,36 @@
 APPLICATION_HOME="$( cd "$( dirname "$0" )" && pwd )"
 cd "$APPLICATION_HOME"
 
+PREFER_SYSTEM_JRE={{preferSystemJre}}
 INCLUDES_JRE={{includesJre}}
 VM_ARGS="{{vmArgs}}"
 APP_ARGS="{{appArgs}}"
 MAIN_CLASS_NAME={{mainClassName}}
 CLASSPATH="{{classpath}}"
 
-if $INCLUDES_JRE ; then
-	JAVA_COMMAND="$APPLICATION_HOME/jre/bin/java"
+if $PREFER_SYSTEM_JRE; then
+	if ! type "java" > /dev/null; then
+		if $INCLUDES_JRE ; then
+			JAVA_COMMAND="$APPLICATION_HOME/jre/bin/java"
+		else
+			echo "java is required but not installed"
+			exit 1
+		fi
+	else 
+		JAVA_COMMAND="java"
+	fi
 else
-	JAVA_COMMAND="java"
+	if $INCLUDES_JRE ; then
+		JAVA_COMMAND="$APPLICATION_HOME/jre/bin/java"
+	else
+		if ! type "java" > /dev/null; then
+			echo "java is required but not installed"
+			exit 1
+		else
+			JAVA_COMMAND="java"
+		fi
+	fi
 fi
+
 
 exec "$JAVA_COMMAND" "$VM_ARGS" -classpath "$CLASSPATH" "$MAIN_CLASS_NAME" "$APP_ARGS"

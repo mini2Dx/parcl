@@ -91,6 +91,7 @@ class LinuxBundleTask extends DefaultTask {
 				.getResourceAsStream("application.sh.template"))
 
 		HashMap<String, Object> scopes = new HashMap<String, Object>()
+		scopes.put("preferSystemJre", project.getExtensions().findByName('parcl').linux.preferSystemJre)
 		scopes.put("includesJre", includesJre)
 		scopes.put("vmArgs", getVmArgs())
 		scopes.put("appArgs", getAppArgs())
