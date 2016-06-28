@@ -1,5 +1,16 @@
 import org.apache.tools.ant.taskdefs.condition.Os
 
+buildscript {
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		jcenter()
+	}
+	dependencies {
+		classpath 'io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.5.3'
+	}
+}
+
 repositories {
 	mavenCentral()
 	maven { url "https://mini2dx.org/maven/content/repositories/thirdparty" }
@@ -7,15 +18,38 @@ repositories {
 
 apply plugin: 'groovy'
 apply plugin: 'maven'
-apply plugin: 'maven-publish'
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+if(project.hasProperty('ossrhUser') && project.hasProperty("release")) {
+	apply plugin: "io.codearte.nexus-staging"
+
+	nexusStaging {
+		username = ossrhUser
+		password = ossrhPassword
+	}
+}
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 group = 'org.mini2Dx'
 version = '1.0.8-SNAPSHOT'
+description = 'Gradle plugin for bundling your Java application for distribution on Windows, Mac and Linux'
 
-configurations { includeInJar }
+task javadocJar(type: Jar) {
+	classifier = 'javadoc'
+	from javadoc
+}
+
+task sourcesJar(type: Jar) {
+	classifier = 'sources'
+	from sourceSets.main.allSource
+}
+
+artifacts {
+	archives javadocJar, sourcesJar
+}
 
 dependencies {
 	compile gradleApi()
@@ -24,10 +58,6 @@ dependencies {
 	compile "com.github.spullara.mustache.java:compiler:0.8.17"
 
 	testCompile 'junit:junit:4.11'
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.9'
 }
 
 if (Os.isFamily(Os.FAMILY_WINDOWS)) {
@@ -47,33 +77,54 @@ if (Os.isFamily(Os.FAMILY_WINDOWS)) {
 	assemble.dependsOn copyExeToJar
 }
 
-jar {
+// Maven Central publication
+if(project.hasProperty('ossrhUser')) {
+	signing {
+		sign configurations.archives
+	}
+	
+	uploadArchives {
+		repositories {
+			mavenDeployer {
+				// POM signature
+				beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+				// Target repository
+				repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+					authentication(userName: ossrhUser, password: ossrhPassword)
+				}
+				pom.project {
+					name project.name
+					description project.description
+					packaging 'jar'
+					url 'https://github.com/mini2Dx/parcl'
 
-}
+					scm {
+						connection 'scm:git:https://github.com/mini2Dx/parcl.git'
+						developerConnection 'scm:git:git@github.com:mini2Dx/parcl.git'
+						url 'https://github.com/mini2Dx/parcl.git'
+					}
 
-task sourceJar(type: Jar) {
-	from sourceSets.main.allJava
-}
+					licenses {
+						license {
+							name 'The MIT License (MIT)'
+							url 'https://opensource.org/licenses/MIT'
+							distribution 'repo'
+						}
+					}
 
-publishing {
-	repositories {
-		maven {
-			url "https://mini2dx.org/maven/content/repositories/releases"
-			if(project.hasProperty('mini2DxMavenUser')) {
-				credentials {
-					username = project.property('mini2DxMavenUser')
-					password = project.property('mini2DxMavenPassword')
+					developers {
+						developer {
+							id = 'tomcashman'
+							name = 'Thomas Cashman'
+							email = 'thomascashman404@gmail.com'
+						}
+					}
 				}
 			}
 		}
 	}
-	publications {
-		maven(MavenPublication) {
-			from components.java
-			
-			artifact sourceJar {
-				classifier "sources"
-			}
-		}
-	}
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.9'
 }
