@@ -105,6 +105,7 @@ parcl {
     vmArgs = ["-Xmx1g"]
     appArgs = ["arg1", "arg2"]
     binName = "myapplication"
+    preferSystemJre = true
 			
     withJre("/usr/lib/jvm/java-8-oracle/")
   }
