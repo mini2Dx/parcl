@@ -1,3 +1,6 @@
+[1.0.8]
+- Linux launchers can now optionally prefer system JRE
+
 [1.0.7]
 - Plugin now lives under min2Dx family as org.mini2Dx.parcl
 
