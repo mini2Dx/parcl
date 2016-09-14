@@ -1,3 +1,6 @@
+[1.0.9]
+- Include parcl.exe in plugin repository
+
 [1.0.8]
 - Linux launchers can now optionally prefer system JRE
 
