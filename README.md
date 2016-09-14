@@ -120,5 +120,3 @@ Gradle wrapper is included in the code. The following tools were used for develo
 * Gradle 2.2.1
 * Groovy 2.3.6
 * Visual Studio 2010
-
-If you are releasing a version of parcl, it **must** be built on Windows so that parcl.exe is compiled and included in the jar.
