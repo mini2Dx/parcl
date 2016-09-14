@@ -1,3 +1,6 @@
+[1.0.10]
+- parcl.pdb no longer included in generated exes
+
 [1.0.9]
 - Include parcl.exe in plugin repository
 
