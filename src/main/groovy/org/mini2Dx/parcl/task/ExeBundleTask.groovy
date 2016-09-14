@@ -84,7 +84,7 @@ class ExeBundleTask extends DefaultTask {
 
 	def createExe(File outputDirectory) {
 		copyInternalFileToExternal("parcl.exe", new File(outputDirectory, project.getExtensions().findByName('parcl').exe.exeName + ".exe").getAbsolutePath())
-		copyInternalFileToExternal("parcl.pdb", new File(outputDirectory, "parcl.pdb").getAbsolutePath())
+		//copyInternalFileToExternal("parcl.pdb", new File(outputDirectory, "parcl.pdb").getAbsolutePath())
 	}
 
 	def createExeConfig(File outputDirectory, boolean includeJre) {
