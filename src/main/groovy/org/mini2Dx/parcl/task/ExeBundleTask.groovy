@@ -108,7 +108,7 @@ class ExeBundleTask extends DefaultTask {
 		
 		writer.println("</classpath>")
 		
-		List<String> vmArgs = project.getExtensions().findByName('parcl').app.vmArgs
+		List<String> vmArgs = project.getExtensions().findByName('parcl').exe.vmArgs
 		if(vmArgs != null) {
 			writer.println("<vmArgs>")
 			for(String arg : vmArgs) {
@@ -119,7 +119,7 @@ class ExeBundleTask extends DefaultTask {
 			writer.println("<vmArgs />")
 		}
 
-		List<String> appArgs = project.getExtensions().findByName('parcl').app.appArgs
+		List<String> appArgs = project.getExtensions().findByName('parcl').exe.appArgs
 		if(appArgs != null) {
 			writer.println("<appArgs>")
 			for(String arg in appArgs) {
