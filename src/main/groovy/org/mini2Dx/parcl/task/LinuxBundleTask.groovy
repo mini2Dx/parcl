@@ -44,7 +44,11 @@ import static org.mini2Dx.parcl.ParclUtils.*
 class LinuxBundleTask extends DefaultTask {
 	LinuxBundleTask() {
 		super()
-		dependsOn("installApp")
+		if(getProject().getTasksByName("installApp", false).isEmpty()) {
+			dependsOn("installDist")
+		} else {
+			dependsOn("installApp")
+		}
 	}
 
 	@TaskAction

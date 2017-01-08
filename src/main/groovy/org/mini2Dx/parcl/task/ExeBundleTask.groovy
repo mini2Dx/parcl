@@ -39,7 +39,11 @@ class ExeBundleTask extends DefaultTask {
 
 	ExeBundleTask() {
 		super()
-		dependsOn("installApp")
+		if(getProject().getTasksByName("installApp", false).isEmpty()) {
+			dependsOn("installDist")
+		} else {
+			dependsOn("installApp")
+		}
 	}
 
 	@TaskAction

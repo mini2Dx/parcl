@@ -36,7 +36,11 @@ class AppBundleTask extends DefaultTask {
     
     AppBundleTask() {
         super()
-        dependsOn("installApp")
+		if(getProject().getTasksByName("installApp", false).isEmpty()) {
+			dependsOn("installDist")
+		} else {
+			dependsOn("installApp")
+		}
     }
 
 	@TaskAction
