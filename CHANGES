@@ -1,3 +1,6 @@
+[1.0.12]
+- Fix plugin compatability with Gradle 3.x
+
 [1.0.11]
 - Fix windows using app settings instead of exe settings (thanks Vladimir Slav)
 
