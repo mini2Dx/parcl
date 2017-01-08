@@ -112,11 +112,3 @@ parcl {
 }
 ```
 
-## Contributing
-
-Pull requests are welcome :) Any issues found please add them to the [Issue Tracker](https://github.com/mini2Dx/parcl/issues).
-
-Gradle wrapper is included in the code. The following tools were used for development:
-* Gradle 2.2.1
-* Groovy 2.3.6
-* Visual Studio 2010
