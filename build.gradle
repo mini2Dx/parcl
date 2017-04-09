@@ -37,6 +37,22 @@ group = 'org.mini2Dx'
 version = '1.1.0-SNAPSHOT'
 description = 'Gradle plugin for bundling your Java application for distribution on Windows, Mac and Linux'
 
+dependencies {
+	compile gradleApi()
+	compile localGroovy()
+	compile files('libs/appbundler-1.0.jar')
+	compile "com.github.spullara.mustache.java:compiler:0.8.17"
+
+	testCompile 'junit:junit:4.11'
+}
+
+task jarWithAppBundler(type: Jar) {
+	from { zipTree(configurations.compile.find { it.getName().contains('appbundler') }) }
+    from sourceSets.main.output
+	classifier = ''
+}
+jarWithAppBundler.dependsOn jar
+
 task javadocJar(type: Jar) {
 	classifier = 'javadoc'
 	from javadoc
@@ -48,17 +64,9 @@ task sourcesJar(type: Jar) {
 }
 
 artifacts {
-	archives javadocJar, sourcesJar
+	archives javadocJar, sourcesJar, jarWithAppBundler
 }
 
-dependencies {
-	compile gradleApi()
-	compile localGroovy()
-	compile "net.java:appbundler:1.0"
-	compile "com.github.spullara.mustache.java:compiler:0.8.17"
-
-	testCompile 'junit:junit:4.11'
-}
 
 if (Os.isFamily(Os.FAMILY_WINDOWS)) {
 	task buildExe(type:Exec) {
