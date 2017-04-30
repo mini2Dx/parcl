@@ -5,6 +5,8 @@ parcl
 
 Gradle plugin for bundling your Java application as Windows, Mac and Linux native applications
 
+__Please Note:__ If you are receiving an error about missing dependencies, please upgrade to 1.1.0
+
 ## How to use
 
 Add the following buildscript configuration to the top of your build.gradle
