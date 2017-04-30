@@ -1,3 +1,6 @@
+[1.1.0]
+- Include appbundler from libs folder instead of mini2Dx repo
+
 [1.0.12]
 - Fix plugin compatability with Gradle 3.x
 

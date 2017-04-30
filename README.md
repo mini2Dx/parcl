@@ -18,7 +18,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'org.mini2Dx', name: 'parcl', version: '1.0.12'
+        classpath group: 'org.mini2Dx', name: 'parcl', version: '1.1.0'
     }
 }
 ```
