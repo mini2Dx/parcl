@@ -7,6 +7,13 @@ Gradle plugin for bundling your Java application as Windows, Mac and Linux nativ
 
 __Please Note:__ If you are receiving an error about missing dependencies, please upgrade to 1.1.0
 
+The plugin can generate the following platform natives:
+ * Windows - .exe
+ * Mac OS X - .app
+ * Linux - .sh script
+ 
+Future releases may add more native formats.
+
 ## How to use
 
 Add the following buildscript configuration to the top of your build.gradle
