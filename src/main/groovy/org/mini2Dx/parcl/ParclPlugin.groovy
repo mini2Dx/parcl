@@ -27,6 +27,7 @@ import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.ApplicationPlugin
+import org.gradle.api.tasks.bundling.Zip
 
 import org.mini2Dx.parcl.domain.App
 import org.mini2Dx.parcl.domain.Linux
@@ -53,10 +54,46 @@ class ParclPlugin implements Plugin<Project> {
 
 		if (Os.isFamily(Os.FAMILY_WINDOWS)) {
 			project.task('bundleNative', type: ExeBundleTask)
+			project.tasks.create([
+				name: 'bundleNativeZip',
+				type: Zip, 
+				dependsOn: 'bundleNative'
+			]) {
+				from "${project.buildDir}/windows/"
+				include '**/*'
+				conventionMapping.archiveName = {
+					project.getExtensions().findByName('parcl').exe.exeName + ".zip"
+				}
+				destinationDir(project.file('build'))
+			}
 		} else if (Os.isFamily(Os.FAMILY_MAC)) {
 			project.task('bundleNative', type: AppBundleTask)
+			project.tasks.create([
+				name: 'bundleNativeZip',
+				type: Zip, 
+				dependsOn: 'bundleNative'
+			]) {
+				from "${project.buildDir}/mac/"
+				include '**/*'
+				conventionMapping.archiveName = {
+					project.getExtensions().findByName('parcl').app.appName + ".zip"
+				}
+				destinationDir(project.file('build'))
+			}
 		} else if (Os.isFamily(Os.FAMILY_UNIX)) {
 			project.task('bundleNative', type: LinuxBundleTask)
+			project.tasks.create([
+				name: 'bundleNativeZip',
+				type: Zip,
+				dependsOn: 'bundleNative'
+			]) {
+				from "${project.buildDir}/linux/"
+				include '**/*'
+				conventionMapping.archiveName = {
+					project.getExtensions().findByName('parcl').linux.binName + ".zip"
+				}
+				destinationDir(project.file('build'))
+			}
 		}
 	}
 }

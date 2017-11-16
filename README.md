@@ -65,13 +65,20 @@ project(":projectName") {
 }
 ```
 
-The plugin will add a task called 'bundleNative' to your project. This must be invoked on the platform you wish to bundle the application for, i.e. You must be on Mac OS X to bundle a Mac application
+The plugin will add a task called 'bundleNative' to your project. This must be invoked on the platform you wish to bundle the application for, i.e. You must be on Mac OS X to bundle a Mac application.
 
 ```bash
 gradle clean build bundleNative
 ```
 
 Depending on your platform, the resulting application bundle will appear in build/windows, build/mac or build/linux.
+
+## Tasks
+
+| Task | Description |
+|---|---|
+| bundleNative  |  Generates the native application |
+| bundleNativeZip | Generates the native application and packages it into a .zip  |
 
 ## Advanced Configuration
 

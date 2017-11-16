@@ -34,7 +34,7 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 group = 'org.mini2Dx'
-version = '1.1.1-SNAPSHOT'
+version = '1.2.0-SNAPSHOT'
 description = 'Gradle plugin for bundling your Java application for distribution on Windows, Mac and Linux'
 
 dependencies {
