@@ -62,7 +62,9 @@ class ParclPlugin implements Plugin<Project> {
 				from "${project.buildDir}/windows/"
 				include '**/*'
 				conventionMapping.archiveName = {
-					project.getExtensions().findByName('parcl').exe.exeName + ".zip"
+					project.getExtensions().findByName('parcl').exe.zipName != null ?
+						project.getExtensions().findByName('parcl').exe.zipName :
+						project.getExtensions().findByName('parcl').exe.exeName + "-windows.zip"
 				}
 				destinationDir(project.file('build'))
 			}
@@ -76,7 +78,9 @@ class ParclPlugin implements Plugin<Project> {
 				from "${project.buildDir}/mac/"
 				include '**/*'
 				conventionMapping.archiveName = {
-					project.getExtensions().findByName('parcl').app.appName + ".zip"
+					project.getExtensions().findByName('parcl').app.zipName != null ? 
+						project.getExtensions().findByName('parcl').app.zipName :
+						project.getExtensions().findByName('parcl').app.appName + "-mac.zip"
 				}
 				destinationDir(project.file('build'))
 			}
@@ -90,7 +94,9 @@ class ParclPlugin implements Plugin<Project> {
 				from "${project.buildDir}/linux/"
 				include '**/*'
 				conventionMapping.archiveName = {
-					project.getExtensions().findByName('parcl').linux.binName + ".zip"
+					project.getExtensions().findByName('parcl').linux.zipName != null ?
+						project.getExtensions().findByName('parcl').linux.zipName :
+						project.getExtensions().findByName('parcl').linux.binName + "-linux.zip"
 				}
 				destinationDir(project.file('build'))
 			}

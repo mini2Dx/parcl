@@ -30,11 +30,12 @@ import java.util.List;
  * Configuration for Linux binaries
  */
 class Linux {
-	List<String> vmArgs
-	List<String> appArgs
-	String binName
-	String javaHome
-	boolean preferSystemJre
+	List<String> vmArgs;
+	List<String> appArgs;
+	String binName;
+	String javaHome;
+	boolean preferSystemJre;
+	String zipName;
 	
 	void withJre(String javaHome) {
 		this.javaHome = javaHome

@@ -86,6 +86,7 @@ There are several optional configuration parameters for each platform.
 
 | Optional Parameter  | Description | Example |
 | ------------- | ------------- | ------------- |
+| zipName | Specifies the name for the outputted zip file  | zipName = 'my-game-windows.zip' |
 | vmArgs | Passes JVM options to the application on launch  | vmArgs = ["-Xmx1g"] |
 | appArgs  | Passes application arguments to the application on launch  | appArgs = ["arg1", "arg2"] |
 | withJre  | Copies your local JRE and bundles it with the application. The value of $JAVA_HOME must be passed as an argument. | withJre("/usr/lib/jvm/java-8-oracle/") |
@@ -100,6 +101,7 @@ parcl {
     vmArgs = ["-Xmx1g"]
     appArgs = ["arg1", "arg2"]
     exeName = "myapplication"
+    zipName = 'my-game-windows.zip'
 			
     withJre("C:\\Program Files (x86)\\Java\\jdk1.8.0_25\\jre")
   }
@@ -113,6 +115,7 @@ parcl {
     displayName = 'My Application'
     identifier = 'com.example.my.apple.identifier'
     copyright = 'Copyright 2015 Your Name Here'
+    zipName = 'my-game-mac.zip'
 
     withJre("/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home")
   }
@@ -122,6 +125,7 @@ parcl {
     appArgs = ["arg1", "arg2"]
     binName = "myapplication"
     preferSystemJre = true
+    zipName = 'my-game-linux.zip'
 			
     withJre("/usr/lib/jvm/java-8-oracle/")
   }

@@ -39,6 +39,7 @@ class App {
     String identifier
     String copyright
     String javaHome;
+	String zipName;
     
     void withJre(String javaHome) {
         this.javaHome = javaHome

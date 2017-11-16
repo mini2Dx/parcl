@@ -30,10 +30,11 @@ import java.util.List;
  * Configuration for Windows packages
  */
 class Exe {
-	List<String> vmArgs
-	List<String> appArgs
-    String exeName
-	String javaHome
+	List<String> vmArgs;
+	List<String> appArgs;
+    String exeName;
+	String javaHome;
+	String zipName;
 	
 	void withJre(String javaHome) {
 		this.javaHome = javaHome

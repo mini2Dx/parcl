@@ -1,3 +1,6 @@
+[1.2.1]
+- Zip archive name can now be configured via zipName parameter
+
 [1.2.0]
 - Added bundleNativeZip task to generate a zip archive of the application
 
