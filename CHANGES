@@ -1,3 +1,6 @@
+[1.2.0]
+- Added bundleNativeZip task to generate a zip archive of the application
+
 [1.1.0]
 - Include appbundler from libs folder instead of mini2Dx repo
 

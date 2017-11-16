@@ -77,7 +77,7 @@ Depending on your platform, the resulting application bundle will appear in buil
 
 | Task | Description |
 |---|---|
-| bundleNative  |  Generates the native application |
+| bundleNative  |  Generates the native application for the current platform |
 | bundleNativeZip | Generates the native application and packages it into a .zip  |
 
 ## Advanced Configuration
