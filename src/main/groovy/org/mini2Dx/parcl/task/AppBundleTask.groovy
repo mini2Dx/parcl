@@ -54,12 +54,25 @@ class AppBundleTask extends DefaultTask {
         
         List<String> vmArgs = project.getExtensions().findByName('parcl').app.vmArgs
         if(vmArgs != null) {
-            appBundlerTask.options.addAll(vmArgs)
+            for(String vmArg : vmArgs) {
+                com.oracle.appbundler.Option option = new com.oracle.appbundler.Option();
+                if(vmArg.indexOf('=') > -1) {
+                    option.setName(vmArg.substring(0, vmArg.indexOf('=')));
+                    option.setValue(vmArg.substring(vmArg.indexOf('=') + 1));
+                } else {
+                    option.setValue(vmArg);
+                }
+                appBundlerTask.addConfiguredOption(option);
+            }
         }
         
         List<String> appArgs = project.getExtensions().findByName('parcl').app.appArgs
         if(appArgs != null) {
-            appBundlerTask.arguments.addAll(appArgs)
+            for(String appArg : appArgs) {
+                com.oracle.appbundler.Argument argument = new com.oracle.appbundler.Argument();
+                argument.setValue(appArg);
+                appBundlerTask.addConfiguredArgument(argument);
+            }
         }
         
         appBundlerTask.outputDirectory = outputDirectory
@@ -74,7 +87,7 @@ class AppBundleTask extends DefaultTask {
         
 		String javaHome = project.getExtensions().findByName('parcl').app.javaHome
         if(javaHome != null) {
-			FileSet runtimeFileSet = new FileSet()
+            com.oracle.appbundler.Runtime runtimeFileSet = new com.oracle.appbundler.Runtime()
 			runtimeFileSet.setDir(new File(javaHome))
             appBundlerTask.addConfiguredRuntime(runtimeFileSet)
         }
@@ -83,7 +96,7 @@ class AppBundleTask extends DefaultTask {
         classpathFileSet.setDir(getOutputJarsDirectory())
         classpathFileSet.setIncludes("*.jar")
         appBundlerTask.addConfiguredClassPath(classpathFileSet)
-        
+        appBundlerTask.setProject(project.ant.getProject())
         appBundlerTask.execute()
 	}
     

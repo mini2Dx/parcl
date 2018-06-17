@@ -16,3 +16,5 @@ natives/windows/obj
 *.pdb
 *.suo
 *.user
+
+.idea/
