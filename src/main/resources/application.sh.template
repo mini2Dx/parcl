@@ -34,4 +34,4 @@ else
 fi
 
 
-exec "$JAVA_COMMAND" "$VM_ARGS" -classpath "$CLASSPATH" "$MAIN_CLASS_NAME" "$APP_ARGS"
+exec "$JAVA_COMMAND" $VM_ARGS -classpath "$CLASSPATH" "$MAIN_CLASS_NAME" $APP_ARGS

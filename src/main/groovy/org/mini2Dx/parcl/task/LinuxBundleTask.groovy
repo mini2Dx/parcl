@@ -147,7 +147,13 @@ class LinuxBundleTask extends DefaultTask {
 
 		StringBuilder stringBuilder = new StringBuilder()
 		for(int i = 0; i < args.size(); i++) {
-			stringBuilder.append(args.get(i))
+			if(args.get(i).contains(" ")) {
+				stringBuilder.append('"')
+				stringBuilder.append(args.get(i))
+				stringBuilder.append('"')
+			} else {
+				stringBuilder.append(args.get(i))
+			}
 			if(i < args.size() - 1) {
 				stringBuilder.append(" ")
 			}
