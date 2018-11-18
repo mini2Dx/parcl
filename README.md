@@ -5,8 +5,6 @@ parcl
 
 Gradle plugin for bundling your Java application as Windows, Mac and Linux native applications
 
-__Please Note:__ If you are receiving an error about missing dependencies, please upgrade to 1.1.0
-
 The plugin can generate the following platform natives:
  * Windows - .exe
  * Mac OS X - .app
@@ -63,6 +61,19 @@ project(":projectName") {
       }
    }
 }
+```
+
+__Note:__ If your version of Gradle gives an error regarding mainClassName, the following workaround has been reported to resolve it:
+
+```gradle
+project(":projectName") {
+   apply plugin: "java"
+   apply plugin: "application"
+   apply plugin: "org.mini2Dx.parcl"
+   
+   ........
+
+   project.getConvention().getPlugin(ApplicationPluginConvention.class).setMainClassName("com.example.MyMainClass")
 ```
 
 The plugin will add a task called 'bundleNative' to your project. This must be invoked on the platform you wish to bundle the application for, i.e. You must be on Mac OS X to bundle a Mac application.
