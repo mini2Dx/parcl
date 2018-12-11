@@ -23,18 +23,13 @@
  */
 package org.mini2Dx.parcl.task
 
-import org.mini2Dx.parcl.ParclUtils;
+import org.mini2Dx.parcl.ParclUtils
 import com.github.mustachejava.DefaultMustacheFactory
 import com.github.mustachejava.Mustache
 import com.github.mustachejava.MustacheFactory
 
-import groovy.text.SimpleTemplateEngine
-
-import java.io.File;
-import java.io.FileWriter;
-
-import org.gradle.api.DefaultTask;
-import org.gradle.api.tasks.TaskAction;
+import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.TaskAction
 
 import static org.mini2Dx.parcl.ParclUtils.*
 
@@ -162,20 +157,6 @@ class LinuxBundleTask extends DefaultTask {
 	}
 
 	String getClasspath(File outputDirectory) {
-		StringBuilder stringBuilder = new StringBuilder()
-
-		File jarDirectory = new File(outputDirectory, "libs")
-		File [] jars = jarDirectory.listFiles()
-		for(int i = 0; i < jars.length; i++) {
-			File jar = jars[i]
-			if(jar.isFile() && jar.getAbsolutePath().endsWith(".jar")) {
-				stringBuilder.append('$APPLICATION_HOME/libs/' + jar.getName())
-			}
-			if(i < jars.length - 1) {
-				stringBuilder.append(":")
-			}
-		}
-
-		return stringBuilder.toString()
+		return '$APPLICATION_HOME/libs/*';
 	}
 }
