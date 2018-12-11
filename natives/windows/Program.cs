@@ -38,52 +38,87 @@ namespace parcl
     {
         static void Main(string[] args)
         {
-            if (args.Length > 0)
+            using (StreamWriter outputWriter = new StreamWriter("out.log"))
             {
-                JavaApplicationConfig exampleConfig = new JavaApplicationConfig();
-                exampleConfig.ClassPath = new List<String>();
-                exampleConfig.ClassPath.Add("example.jar");
-                exampleConfig.MainClassName = "com.example.Example";
-                exampleConfig.IncludesJre = false;
-
-                XmlSerializer xmlWriter = new XmlSerializer(exampleConfig.GetType());
-                using (FileStream writer = File.OpenWrite(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "application.example.xml")))
+                using (StreamWriter errorWriter = new StreamWriter("error.log"))
                 {
-                    xmlWriter.Serialize(writer, exampleConfig);
-                }
-                return;
-            }
-            XmlSerializer serializer = new XmlSerializer(typeof(JavaApplicationConfig));
-            JavaApplicationConfig applicationConfig = (JavaApplicationConfig) serializer.Deserialize(
-                File.OpenRead(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "application.xml")));
+                    Console.SetOut(outputWriter);
+                    Console.SetError(errorWriter);
 
-            Process process = new Process();
-            if (applicationConfig.IncludesJre)
-            {
-                process.StartInfo.FileName = Path.Combine("jre", Path.Combine("bin", "java"));
-            }
-            else
-            {
-                string javaHomePath = GetJavaInstallationPath();
-                string javaPath = System.IO.Path.Combine(javaHomePath, "bin\\Java.exe");
-                if (System.IO.File.Exists(javaPath))
-                {
-                    process.StartInfo.FileName = javaPath;
-                }
-                else
-                {
-                    MessageBox.Show("Could not find Java installation. Please ensure JAVA_HOME is configured.");
-                    return;
-                }
-            }
-            process.StartInfo.Arguments = applicationConfig.ToStartInfoArguments();
-            process.StartInfo.WorkingDirectory = @AppDomain.CurrentDomain.BaseDirectory;
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.CreateNoWindow = true;
+                    try
+                    {
+                        if (args.Length > 0)
+                        {
+                            JavaApplicationConfig exampleConfig = new JavaApplicationConfig();
+                            exampleConfig.ClassPath = new List<String>();
+                            exampleConfig.ClassPath.Add("example.jar");
+                            exampleConfig.MainClassName = "com.example.Example";
+                            exampleConfig.IncludesJre = false;
 
-            Console.WriteLine("Executing " + Path.Combine(process.StartInfo.WorkingDirectory, process.StartInfo.FileName) + " " + process.StartInfo.Arguments);
-            process.Start();
-            process.WaitForExit();
+                            XmlSerializer xmlWriter = new XmlSerializer(exampleConfig.GetType());
+                            using (FileStream writer = File.OpenWrite(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "application.example.xml")))
+                            {
+                                xmlWriter.Serialize(writer, exampleConfig);
+                            }
+                            return;
+                        }
+                        XmlSerializer serializer = new XmlSerializer(typeof(JavaApplicationConfig));
+                        JavaApplicationConfig applicationConfig = (JavaApplicationConfig)serializer.Deserialize(
+                            File.OpenRead(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "application.xml")));
+
+                        Process process = new Process();
+                        if (applicationConfig.IncludesJre)
+                        {
+                            process.StartInfo.FileName = Path.Combine("jre", Path.Combine("bin", "java"));
+                        }
+                        else
+                        {
+                            string javaHomePath = GetJavaInstallationPath();
+                            string javaPath = System.IO.Path.Combine(javaHomePath, "bin\\Java.exe");
+                            if (System.IO.File.Exists(javaPath))
+                            {
+                                process.StartInfo.FileName = javaPath;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Could not find Java installation. Please ensure JAVA_HOME is configured.");
+                                return;
+                            }
+                        }
+                        process.StartInfo.Arguments = applicationConfig.ToStartInfoArguments();
+                        process.StartInfo.WorkingDirectory = @AppDomain.CurrentDomain.BaseDirectory;
+                        process.StartInfo.UseShellExecute = false;
+                        process.StartInfo.CreateNoWindow = true;
+                        process.StartInfo.RedirectStandardOutput = true;
+                        process.StartInfo.RedirectStandardError = true;
+
+                        process.OutputDataReceived += Process_OutputDataReceived;
+                        process.ErrorDataReceived += Process_ErrorDataReceived;
+
+                        Console.WriteLine("Executing " + Path.Combine(process.StartInfo.WorkingDirectory, process.StartInfo.FileName) + " " + process.StartInfo.Arguments);
+                        process.Start();
+
+                        process.BeginOutputReadLine();
+                        process.BeginErrorReadLine();
+                        process.WaitForExit();
+                        process.Close();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.Error.Write(e.ToString());
+                    }
+                }
+            }
+        }
+
+        private static void Process_ErrorDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            Console.Error.WriteLine(e.Data);
+        }
+
+        private static void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            Console.Out.WriteLine(e.Data);
         }
 
         private static string GetJavaInstallationPath()

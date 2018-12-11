@@ -100,16 +100,7 @@ class ExeBundleTask extends DefaultTask {
 		writer.println("<includesJre>" + includeJre + "</includesJre>")
 		
 		writer.println("<classpath>")
-		
-		File jarDirectory = new File(outputDirectory, "libs")
-		File [] jars = jarDirectory.listFiles()
-		for(int i = 0; i < jars.length; i++) {
-			File jar = jars[i]
-			if(jar.isFile() && jar.getAbsolutePath().endsWith(".jar")) {
-				writer.println("<jar>" + jar.getName() + "</jar>")
-			}
-		}
-		
+		writer.println("<jar>*</jar>")
 		writer.println("</classpath>")
 		
 		List<String> vmArgs = project.getExtensions().findByName('parcl').exe.vmArgs

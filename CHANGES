@@ -1,4 +1,6 @@
-[1.3.2-SNAPSHOT]
+[1.4.0-SNAPSHOT]
+- Exe now pipes StandardOut to out.log and StandardError to error.log
+- Exe and .sh classpaths now use * pattern to match runtime jars
 
 [1.3.1]
 - Fixed VM arg wrapping on Linux

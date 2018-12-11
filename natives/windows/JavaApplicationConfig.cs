@@ -64,18 +64,8 @@ namespace parcl
                 }
             }
 
-            arguments.Append("-classpath \"");
-            for (int i = 0; i < ClassPath.Count; i++)
-            {
-                String jar = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.Combine("libs", ClassPath[i])));
-                arguments.Append(jar);
-
-                if(i < ClassPath.Count - 1) {
-                    arguments.Append(";");
-                }
-            }
-
-            arguments.Append("\" " + MainClassName);
+            arguments.Append("-classpath \"libs\\*\" ");
+            arguments.Append(MainClassName);
 
             if (AppArgs != null)
             {

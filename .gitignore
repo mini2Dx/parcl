@@ -18,3 +18,4 @@ natives/windows/obj
 *.user
 
 .idea/
+natives/windows/.vs/
