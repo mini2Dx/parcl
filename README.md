@@ -20,12 +20,10 @@ Add the following buildscript configuration to the top of your build.gradle
 buildscript {
     repositories {
         mavenLocal()
-        maven { url "https://mini2dx.org/maven/content/repositories/thirdparty" }
-		maven { url "https://mini2dx.org/maven/content/repositories/releases" }
         mavenCentral()
     }
     dependencies {
-        classpath group: 'org.mini2Dx', name: 'parcl', version: '1.3.1'
+        classpath group: 'org.mini2Dx', name: 'parcl', version: '1.4.0'
     }
 }
 ```
