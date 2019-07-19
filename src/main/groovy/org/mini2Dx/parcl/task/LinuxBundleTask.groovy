@@ -23,6 +23,7 @@
  */
 package org.mini2Dx.parcl.task
 
+import org.gradle.api.tasks.OutputDirectory
 import org.mini2Dx.parcl.ParclUtils
 import com.github.mustachejava.DefaultMustacheFactory
 import com.github.mustachejava.Mustache
@@ -39,11 +40,7 @@ import static org.mini2Dx.parcl.ParclUtils.*
 class LinuxBundleTask extends DefaultTask {
 	LinuxBundleTask() {
 		super()
-		if(getProject().getTasksByName("installApp", false).isEmpty()) {
-			dependsOn("installDist")
-		} else {
-			dependsOn("installApp")
-		}
+		dependsOn("installDist")
 	}
 
 	@TaskAction
@@ -158,5 +155,10 @@ class LinuxBundleTask extends DefaultTask {
 
 	String getClasspath(File outputDirectory) {
 		return '$APPLICATION_HOME/libs/*';
+	}
+
+	@OutputDirectory
+	File getTargetDirectory() {
+		return getProject().file("build/linux");
 	}
 }

@@ -23,6 +23,8 @@
  */
 package org.mini2Dx.parcl.task
 
+import org.gradle.api.tasks.OutputDirectory
+
 import java.io.File;
 
 import org.gradle.api.DefaultTask
@@ -39,11 +41,7 @@ class ExeBundleTask extends DefaultTask {
 
 	ExeBundleTask() {
 		super()
-		if(getProject().getTasksByName("installApp", false).isEmpty()) {
-			dependsOn("installDist")
-		} else {
-			dependsOn("installApp")
-		}
+		dependsOn("installDist")
 	}
 
 	@TaskAction
@@ -140,5 +138,10 @@ class ExeBundleTask extends DefaultTask {
 		File installDir = new File(project.getBuildDir(), "install")
 		File projectInstallDir = new File(installDir, project.name)
 		return new File(projectInstallDir, "lib")
+	}
+
+	@OutputDirectory
+	File getTargetDirectory() {
+		return getProject().file("build/windows");
 	}
 }

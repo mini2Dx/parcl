@@ -30,11 +30,11 @@ if(project.hasProperty('ossrhUser') && project.hasProperty("release")) {
 	}
 }
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 group = 'org.mini2Dx'
-version = '1.4.1-SNAPSHOT'
+version = '1.5.0-SNAPSHOT'
 description = 'Gradle plugin for bundling your Java application for distribution on Windows, Mac and Linux'
 
 dependencies {

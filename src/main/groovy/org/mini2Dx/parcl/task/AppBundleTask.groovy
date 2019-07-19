@@ -25,6 +25,7 @@ package org.mini2Dx.parcl.task
 
 import org.apache.tools.ant.types.FileSet
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 
 import com.oracle.appbundler.AppBundlerTask
@@ -36,11 +37,7 @@ class AppBundleTask extends DefaultTask {
     
     AppBundleTask() {
         super()
-		if(getProject().getTasksByName("installApp", false).isEmpty()) {
-			dependsOn("installDist")
-		} else {
-			dependsOn("installApp")
-		}
+        dependsOn("installDist")
     }
 
 	@TaskAction
@@ -111,5 +108,10 @@ class AppBundleTask extends DefaultTask {
         File installDir = new File(project.getBuildDir(), "install")
         File projectInstallDir = new File(installDir, project.name)
         return new File(projectInstallDir, "lib")
+    }
+
+    @OutputDirectory
+    File getTargetDirectory() {
+        return getProject().file("build/mac");
     }
 }
