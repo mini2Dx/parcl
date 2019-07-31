@@ -53,7 +53,7 @@ namespace parcl
         [XmlElement("includesJre")]
         public bool IncludesJre { get; set; }
 
-        public String ToStartInfoArguments()
+        public String ToStartInfoArguments(String[] runtimeArgs)
         {
             StringBuilder arguments = new StringBuilder();
             if (VmArgs != null)
@@ -73,6 +73,11 @@ namespace parcl
                 {
                     arguments.Append(" " + arg);
                 }
+            }
+
+            foreach (String arg in runtimeArgs)
+            {
+                arguments.Append(" " + arg);
             }
 
             return arguments.ToString();
