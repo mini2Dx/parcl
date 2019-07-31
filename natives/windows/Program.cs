@@ -47,7 +47,7 @@ namespace parcl
 
                     try
                     {
-                        if (args.Length > 0)
+                        if (args.Length == 1 && args[0].Equals("--example"))
                         {
                             JavaApplicationConfig exampleConfig = new JavaApplicationConfig();
                             exampleConfig.ClassPath = new List<String>();
@@ -85,7 +85,7 @@ namespace parcl
                                 return;
                             }
                         }
-                        process.StartInfo.Arguments = applicationConfig.ToStartInfoArguments();
+                        process.StartInfo.Arguments = applicationConfig.ToStartInfoArguments(args);
                         process.StartInfo.WorkingDirectory = @AppDomain.CurrentDomain.BaseDirectory;
                         process.StartInfo.UseShellExecute = false;
                         process.StartInfo.CreateNoWindow = true;
