@@ -38,9 +38,13 @@ namespace parcl
     {
         static void Main(string[] args)
         {
-            using (StreamWriter outputWriter = new StreamWriter("out.log"))
+            var fileHandler = new FileHandler();
+            string outPath = fileHandler.PathTo("out.log");
+            string errorPath = fileHandler.PathTo("error.log");
+
+            using (StreamWriter outputWriter = new StreamWriter(outPath))
             {
-                using (StreamWriter errorWriter = new StreamWriter("error.log"))
+                using (StreamWriter errorWriter = new StreamWriter(errorPath))
                 {
                     Console.SetOut(outputWriter);
                     Console.SetError(errorWriter);
@@ -56,7 +60,7 @@ namespace parcl
                             exampleConfig.IncludesJre = false;
 
                             XmlSerializer xmlWriter = new XmlSerializer(exampleConfig.GetType());
-                            using (FileStream writer = File.OpenWrite(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "application.example.xml")))
+                            using (FileStream writer = File.OpenWrite(fileHandler.PathTo("application.example.xml")))
                             {
                                 xmlWriter.Serialize(writer, exampleConfig);
                             }
