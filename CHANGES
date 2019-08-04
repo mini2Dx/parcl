@@ -1,7 +1,5 @@
-[1.7.0]
+[1.6.1]
 - Exe now writes logs to folder in AppData if write permissions are not available for working directory
-
-[1.6.1-SNAPSHOT]
 
 [1.6.0]
 - Exe now passes command line arguments to packaged program
