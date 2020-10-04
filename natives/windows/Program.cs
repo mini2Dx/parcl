@@ -102,6 +102,26 @@ namespace parcl
                         Console.WriteLine("Executing " + Path.Combine(process.StartInfo.WorkingDirectory, process.StartInfo.FileName) + " " + process.StartInfo.Arguments);
                         process.Start();
 
+                        if (applicationConfig.ProcessPriority != null && applicationConfig.ProcessPriority.Length > 0)
+                        {
+                            switch (applicationConfig.ProcessPriority.ToLower())
+                            {
+                                case "low":
+                                    process.PriorityClass = ProcessPriorityClass.BelowNormal;
+                                    break;
+                                case "high":
+                                    process.PriorityClass = ProcessPriorityClass.High;
+                                    break;
+                                case "realtime":
+                                    process.PriorityClass = ProcessPriorityClass.RealTime;
+                                    break;
+                                default:
+                                case "normal":
+                                    process.PriorityClass = ProcessPriorityClass.Normal;
+                                    break;
+                            }
+                        }
+
                         process.BeginOutputReadLine();
                         process.BeginErrorReadLine();
                         process.WaitForExit();

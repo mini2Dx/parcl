@@ -35,6 +35,7 @@ class Exe {
     String exeName;
 	String javaHome;
 	String zipName;
+	String processPriority;
 	
 	void withJre(String javaHome) {
 		this.javaHome = javaHome

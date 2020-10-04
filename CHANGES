@@ -1,4 +1,5 @@
 [1.6.2-SNAPSHOT]
+- Add configuration to set Windows process priority
 
 [1.6.1]
 - Exe now writes logs to folder in AppData if write permissions are not available for working directory

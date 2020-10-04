@@ -53,6 +53,9 @@ namespace parcl
         [XmlElement("includesJre")]
         public bool IncludesJre { get; set; }
 
+        [XmlElement("processPriority")]
+        public String ProcessPriority { get; set; }
+
         public String ToStartInfoArguments(String[] runtimeArgs)
         {
             StringBuilder arguments = new StringBuilder();

@@ -96,6 +96,11 @@ class ExeBundleTask extends DefaultTask {
 
 		writer.println("<mainClassName>" + project.convention.plugins.application.mainClassName + "</mainClassName>")
 		writer.println("<includesJre>" + includeJre + "</includesJre>")
+
+		if(project.getExtensions().findByName('parcl').exe.processPriority != null &&
+				project.getExtensions().findByName('parcl').exe.processPriority.length() > 0) {
+			writer.println("<processPriority>" + project.getExtensions().findByName('parcl').exe.processPriority + "</processPriority>")
+		}
 		
 		writer.println("<classpath>")
 		writer.println("<jar>*</jar>")
