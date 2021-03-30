@@ -85,11 +85,13 @@ class AppBundleTask extends DefaultTask {
 		String javaHome = project.getExtensions().findByName('parcl').app.javaHome
         if(javaHome != null) {
             com.oracle.appbundler.Runtime runtimeFileSet = new com.oracle.appbundler.Runtime()
+            runtimeFileSet.setProject(getProject())
 			runtimeFileSet.setDir(new File(javaHome))
             appBundlerTask.addConfiguredRuntime(runtimeFileSet)
         }
         
         FileSet classpathFileSet = new FileSet()
+        classpathFileSet.setProject(getProject())
         classpathFileSet.setDir(getOutputJarsDirectory())
         classpathFileSet.setIncludes("*.jar")
         appBundlerTask.addConfiguredClassPath(classpathFileSet)
