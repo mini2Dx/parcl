@@ -1,6 +1,8 @@
-[1.7.1-SNAPSHOT]
+[1.7.1]
+- Fix appbundler task not referencing ant project correctly
 
 [1.7.0]
+- Upgrade to Gradle 5.4.1
 - Add configuration to set Windows process priority
 - Update to appbundler based on github.com/TheInfiniteKind/appbundler
 
