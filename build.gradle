@@ -64,7 +64,7 @@ task sourcesJar(type: Jar) {
 }
 
 artifacts {
-	archives javadocJar, sourcesJar, jarWithAppBundler
+	archives javadocJar, sourcesJar
 }
 
 
@@ -87,11 +87,11 @@ if (Os.isFamily(Os.FAMILY_WINDOWS)) {
 
 // Maven Central publication
 if(project.hasProperty('ossrhUser')) {
-	signArchives.dependsOn jarWithAppBundler
-
 	signing {
 		sign configurations.archives
 	}
+
+	signArchives.dependsOn jarWithAppBundler
 	
 	uploadArchives {
 		repositories {
