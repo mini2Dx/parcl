@@ -87,6 +87,8 @@ if (Os.isFamily(Os.FAMILY_WINDOWS)) {
 
 // Maven Central publication
 if(project.hasProperty('ossrhUser')) {
+	signArchives.dependsOn jarWithAppBundler
+
 	signing {
 		sign configurations.archives
 	}
