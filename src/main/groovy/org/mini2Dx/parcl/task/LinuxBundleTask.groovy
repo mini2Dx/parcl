@@ -23,6 +23,7 @@
  */
 package org.mini2Dx.parcl.task
 
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.OutputDirectory
 import org.mini2Dx.parcl.ParclUtils
 import com.github.mustachejava.DefaultMustacheFactory
@@ -125,10 +126,12 @@ class LinuxBundleTask extends DefaultTask {
 		return new File(projectInstallDir, "lib")
 	}
 
+	@Input
 	String getVmArgs() {
 		return getArgs(project.getExtensions().findByName('parcl').linux.vmArgs)
 	}
 
+	@Input
 	String getAppArgs() {
 		return getArgs(project.getExtensions().findByName('parcl').linux.appArgs)
 	}
