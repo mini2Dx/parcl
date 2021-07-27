@@ -91,7 +91,7 @@ class LinuxBundleTask extends DefaultTask {
 		scopes.put("includesJre", includesJre)
 		scopes.put("vmArgs", getVmArgs())
 		scopes.put("appArgs", getAppArgs())
-		scopes.put("mainClassName", project.convention.plugins.application.mainClassName)
+		scopes.put("mainClassName", project.extensions.findByName("application").mainClassName)
 		scopes.put("classpath", getClasspath(outputDirectory))
 
 		try {
@@ -118,6 +118,7 @@ class LinuxBundleTask extends DefaultTask {
 		outputDirectory.mkdir()
 	}
 
+	@OutputDirectory
 	File getOutputJarsDirectory() {
 		File installDir = new File(project.getBuildDir(), "install")
 		File projectInstallDir = new File(installDir, project.name)

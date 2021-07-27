@@ -94,7 +94,7 @@ class ExeBundleTask extends DefaultTask {
 		writer.println("<?xml version=\"1.0\"?>")
 		writer.println("<application xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">")
 
-		writer.println("<mainClassName>" + project.convention.plugins.application.mainClassName + "</mainClassName>")
+		writer.println("<mainClassName>" + project.extensions.findByName("application").mainClassName + "</mainClassName>")
 		writer.println("<includesJre>" + includeJre + "</includesJre>")
 
 		if(project.getExtensions().findByName('parcl').exe.processPriority != null &&
@@ -139,6 +139,7 @@ class ExeBundleTask extends DefaultTask {
 		outputDirectory.mkdir()
 	}
 
+	@OutputDirectory
 	File getOutputJarsDirectory() {
 		File installDir = new File(project.getBuildDir(), "install")
 		File projectInstallDir = new File(installDir, project.name)
