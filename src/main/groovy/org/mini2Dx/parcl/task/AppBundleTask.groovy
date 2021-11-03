@@ -52,12 +52,7 @@ class AppBundleTask extends DefaultTask {
         if(vmArgs != null) {
             for(String vmArg : vmArgs) {
                 com.oracle.appbundler.Option option = new com.oracle.appbundler.Option();
-                if(vmArg.indexOf('=') > -1) {
-                    option.setName(vmArg.substring(0, vmArg.indexOf('=')));
-                    option.setValue(vmArg.substring(vmArg.indexOf('=') + 1));
-                } else {
-                    option.setValue(vmArg);
-                }
+                option.setValue(vmArg);
                 appBundlerTask.addConfiguredOption(option);
             }
         }

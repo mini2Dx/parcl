@@ -1,5 +1,6 @@
-[1.7.2]
+[1.8.0]
 - Fix compatibility with Gradle 7.x
+- Fix garbage collector args being incorrectly passed to Mac app
 
 [1.7.1]
 - Fix appbundler task not referencing ant project correctly
