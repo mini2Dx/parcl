@@ -1,3 +1,6 @@
+[1.7.2]
+- Fix compatibility with Gradle 7.x
+
 [1.7.1]
 - Fix appbundler task not referencing ant project correctly
 

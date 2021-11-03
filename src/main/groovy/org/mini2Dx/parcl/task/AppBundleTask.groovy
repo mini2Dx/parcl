@@ -23,12 +23,11 @@
  */
 package org.mini2Dx.parcl.task
 
+import com.oracle.appbundler.AppBundlerTask
 import org.apache.tools.ant.types.FileSet
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
-
-import com.oracle.appbundler.AppBundlerTask
 
 /**
  * Task for bundling applications into a .app for Mac OS X
@@ -80,8 +79,8 @@ class AppBundleTask extends DefaultTask {
         appBundlerTask.applicationCategory = project.getExtensions().findByName('parcl').app.applicationCategory
         appBundlerTask.displayName = project.getExtensions().findByName('parcl').app.displayName
         appBundlerTask.identifier = project.getExtensions().findByName('parcl').app.identifier
-        appBundlerTask.mainClassName = project.convention.plugins.application.mainClassName
-        
+        appBundlerTask.mainClassName = project.getExtensions().findByName("application").mainClassName
+
 		String javaHome = project.getExtensions().findByName('parcl').app.javaHome
         if(javaHome != null) {
             com.oracle.appbundler.Runtime runtimeFileSet = new com.oracle.appbundler.Runtime()
@@ -105,7 +104,8 @@ class AppBundleTask extends DefaultTask {
         }
         outputDirectory.mkdir()
     }
-    
+
+    @OutputDirectory
     File getOutputJarsDirectory() {
         File installDir = new File(project.getBuildDir(), "install")
         File projectInstallDir = new File(installDir, project.name)
